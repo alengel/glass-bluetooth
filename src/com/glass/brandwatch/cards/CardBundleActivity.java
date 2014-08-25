@@ -15,7 +15,7 @@ import com.google.android.glass.widget.CardScrollAdapter;
 import com.google.android.glass.widget.CardScrollView;
 
 public class CardBundleActivity extends Activity {
-
+	private static final String TAG = CardBundleActivity.class.getSimpleName();
 	private List<View> cardsBundle;
 	private CardScrollView cardScrollView;
 
@@ -23,37 +23,33 @@ public class CardBundleActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Create the individual cards
 		createCards();
 
-		// Setup the scroller, that allows for scrolling between multiple cards
 		cardScrollView = new CardScrollView(this);
 		ScrollAdapter adapter = new ScrollAdapter();
 		cardScrollView.setAdapter(adapter);
 		cardScrollView.activate();
 		setContentView(cardScrollView);
+		
+		Log.i(TAG, "Measurement " + "Cards displaying on Glass");
 	}
 
-	// Get the intent data and build the cards
 	private void createCards() {
 		Intent intent = getIntent();
 		List<String> data = intent.getStringArrayListExtra("data");
 
-		// Extract the data from the array
 		String featuresData = data.get(0);
 		String sentimentData = data.get(1);
 		String topicsData = data.get(2);
-
-		// Build the individual cards from the data
+		
+		Log.i(TAG, "Measurement " + "Starting to build cards");
+		
 		cardsBundle = new ArrayList<View>();
 		cardsBundle.add(SentimentCard.build(this, sentimentData));
 		cardsBundle.add(TopicsCard.build(this, topicsData));
 		cardsBundle.add(FeaturesCard.build(this, featuresData));
-
-		Log.v("CardBundleActivity", "finished building the cards");
 	}
 
-	// Generic functions that need to be overridden to setup the ScrollAdapter
 	private class ScrollAdapter extends CardScrollAdapter {
 
 		@Override

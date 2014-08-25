@@ -40,22 +40,22 @@ public class RequestBrandDataBluetoothTask extends AsyncTask<Void, Void, ArrayLi
 		BluetoothSocket socket = null;
 		OutputStream outputStream = null;
 		InputStream inputStream = null;
-		
+
 		try {
 			// Connect to the socket
 			UUID uuid = UUID.fromString(PropertiesManager.getProperty("bluetooth_uuid"));
 			socket = device.createInsecureRfcommSocketToServiceRecord(uuid);
 			socket.connect();
-			
+
 			outputStream = socket.getOutputStream();
 			inputStream = socket.getInputStream();
-			
+
 			// Send query to server
 			StreamUtils.writeToSocket(outputStream, query);
-			
+
 			// Get response
 			value = StreamUtils.readFromSocket(inputStream);
-			
+
 			// Notify the server that we are done
 			StreamUtils.writeToSocket(outputStream, "completed");
 
@@ -89,9 +89,10 @@ public class RequestBrandDataBluetoothTask extends AsyncTask<Void, Void, ArrayLi
 				}
 			}
 		}
-		
-		// Deserialise the data we got bake from the server. For now an assumption is made that it is
-		// an array list of strings
+
+		// Deserialise the data we got back from the server. For now an
+		// assumption is made that it is an array list of strings
+		@SuppressWarnings("unchecked")
 		ArrayList<String> results = (ArrayList<String>) SerializationUtils.deserialize(value);
 		return results;
 	}
@@ -99,10 +100,14 @@ public class RequestBrandDataBluetoothTask extends AsyncTask<Void, Void, ArrayLi
 	@Override
 	protected void onPostExecute(ArrayList<String> data) {
 		if (data != null) {
-			Log.i(TAG, String.format("Received brand data for '%s' from device '%s'", query, device.getName()));
+			Log.i(TAG,
+					String.format("Received brand data for '%s' from device '%s'", query,
+							device.getName()));
 			showCardsActivity(data);
 		} else {
-			Log.i(TAG, String.format("Failed to query brand data for '%s' from device '%s'", device.getName()));
+			Log.i(TAG,
+					String.format("Failed to query brand data for '%s' from device '%s'",
+							device.getName()));
 		}
 	}
 

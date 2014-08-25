@@ -33,7 +33,7 @@ public class WaitActivity extends Activity {
 			if (bluetoothAdapter.isEnabled() == false) {
 				enableBluetooth();
 			} else {
-				queryProductInfo();
+				sendProductInfo();
 			}
 		}
 	}
@@ -42,27 +42,28 @@ public class WaitActivity extends Activity {
 		Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH);
 	}
-	
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-	    if (requestCode == ENABLE_BLUETOOTH) {
-			queryProductInfo();
-	    }
+		if (requestCode == ENABLE_BLUETOOTH) {
+			sendProductInfo();
+		}
 	}
 
-	private void queryProductInfo() {
+	private void sendProductInfo() {
 		Intent intent = getIntent();
 		String query = intent.getStringExtra("query");
-		
+
 		Set<BluetoothDevice> bluetoothDevices = bluetoothAdapter.getBondedDevices();
-		
-		if(bluetoothDevices.size() == 0) {
+
+		if (bluetoothDevices.size() == 0) {
 			Log.w(TAG, "Glass is not connected to any bluetooth device.");
 			return;
 		}
-		
+
 		for (BluetoothDevice device : bluetoothAdapter.getBondedDevices()) {
-			// For now we assume that the first device is the Android phone with the server on it
+			// For now we assume that the first device is the Android phone with
+			// the server on it
 			new RequestBrandDataBluetoothTask(getApplicationContext(), device, query).execute();
 			break;
 		}

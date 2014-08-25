@@ -36,7 +36,7 @@
 		            android:id="@+id/positive_value"
 		            android:textSize="30sp"
 		            android:gravity="right"
-		            android:textColor="#FF0000" />
+		            android:textColor="#00FF00" />
 		    </TableRow>
 		    
 		    <TableRow>
@@ -47,7 +47,7 @@
 		            android:id="@+id/negative_value"
 		            android:textSize="30sp"
 		            android:gravity="right"
-		            android:textColor="#00FF00" />
+		            android:textColor="#FF0000" />
 		    </TableRow>
 		</TableLayout>
 

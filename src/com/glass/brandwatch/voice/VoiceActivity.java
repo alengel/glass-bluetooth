@@ -18,7 +18,7 @@ import com.google.android.glass.touchpad.GestureDetector;
 
 public class VoiceActivity extends Activity {
 
-	private static final String TAG = "VoiceActivity";
+	private static final String TAG = VoiceActivity.class.getSimpleName();
 
 	// For tap events
 	private GestureDetector mGestureDetector;
@@ -57,7 +57,7 @@ public class VoiceActivity extends Activity {
 				return;
 			}
 
-			Log.v(TAG, "finished voice processing");
+			Log.i(TAG, "Measurement " + "Retrieved voice string and making data requests");
 
 			// Activate Bluetooth server connection, pass in the requested query
 			Intent intent = new Intent(this, WaitActivity.class);

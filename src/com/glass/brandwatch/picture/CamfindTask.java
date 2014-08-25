@@ -27,11 +27,10 @@ import com.glass.brandwatch.utils.HttpRequest;
 import com.glass.brandwatch.utils.PropertiesManager;
 
 public class CamfindTask extends AsyncTask<File, Void, String> {
-	private static final String TAG = "Camfind";
+	private static final String TAG = CamfindTask.class.getSimpleName();
 	private Context context;
-	
-	CamfindTask(Context context)
-	{
+
+	CamfindTask(Context context) {
 		this.context = context;
 	}
 
@@ -134,16 +133,19 @@ public class CamfindTask extends AsyncTask<File, Void, String> {
 	}
 
 	// Called after each HTTP request
-	protected void onPostExecute(String productName) {
-		if (productName == null) {
-			Log.v(TAG, "Could not find product name");
-		} else {
-			Log.v(TAG, "Found product name " + productName);
+		protected void onPostExecute(String productName) {
+			if (productName == null) {
+				Log.v(TAG, "Could not find product name");
+			} else {
+				Log.v(TAG, "Found product name " + productName);
 
-			// Activate Bluetooth server connection, pass in the requested query
-			Intent intent = new Intent(context, WaitActivity.class);
-			intent.putExtra("query", "iPhone 5");
-			context.startActivity(intent);
+				// Activate Bluetooth server connection, pass in the requested query
+				Intent intent = new Intent(context, WaitActivity.class);
+				intent.putExtra("query", "iPhone 5");
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(intent);
+				
+				Log.i(TAG, "Measurement " + "Retrieved image string and making data requests");
+			}
 		}
-	}
 }
