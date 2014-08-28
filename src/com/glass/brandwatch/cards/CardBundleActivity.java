@@ -30,7 +30,7 @@ public class CardBundleActivity extends Activity {
 		cardScrollView.setAdapter(adapter);
 		cardScrollView.activate();
 		setContentView(cardScrollView);
-		
+
 		Log.i(TAG, "Measurement " + "Cards displaying on Glass");
 	}
 
@@ -41,9 +41,9 @@ public class CardBundleActivity extends Activity {
 		String featuresData = data.get(0);
 		String sentimentData = data.get(1);
 		String topicsData = data.get(2);
-		
+
 		Log.i(TAG, "Measurement " + "Starting to build cards");
-		
+
 		cardsBundle = new ArrayList<View>();
 		cardsBundle.add(SentimentCard.build(this, sentimentData));
 		cardsBundle.add(TopicsCard.build(this, topicsData));

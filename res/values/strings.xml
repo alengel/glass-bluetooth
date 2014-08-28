@@ -2,17 +2,12 @@
 <resources>
 
     <string name="app_name">Brandwatch</string>
-    <string name="action_settings">Settings</string>
-    
-    <string name="voice_activity">Say product here</string>
-    <string name="taking_picture_activity">Take picture here</string>
-    
+    <string name="voice_activity">Voice Activity</string>
+	<string name="waiting">Please wait&#8230;</string>
+	
     <!-- For voice input -->
     <string name="voice_trigger">find reviews</string>
-    
     <string name="activate_voice">a product name</string>
     <string name="activate_picture">an image</string>
     
-    <string name="waiting">Please wait&#8230;</string>
-  
 </resources>

@@ -1,8 +1,6 @@
-package com.glass.brandwatch.asynctask;
+package com.glass.brandwatch.application;
 
 import java.util.Set;
-
-import com.glass.brandwatch.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -11,7 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-public class WaitActivity extends Activity {
+import com.glass.brandwatch.R;
+import com.glass.brandwatch.asynctask.RequestBrandDataBluetoothTask;
+import com.glass.brandwatch_shared.interfaces.WaitActivityInterface;
+
+public class WaitActivity extends Activity implements WaitActivityInterface {
 	static final private String TAG = WaitActivity.class.getSimpleName();
 	static final private int ENABLE_BLUETOOTH = 1;
 
@@ -43,6 +45,7 @@ public class WaitActivity extends Activity {
 		startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH);
 	}
 
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		if (requestCode == ENABLE_BLUETOOTH) {

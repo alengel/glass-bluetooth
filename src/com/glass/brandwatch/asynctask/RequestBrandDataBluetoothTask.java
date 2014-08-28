@@ -16,8 +16,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.glass.brandwatch.cards.CardBundleActivity;
-import com.glass.brandwatch.utils.PropertiesManager;
-import com.glass.brandwatch.utils.StreamUtils;
+import com.glass.brandwatch_shared.utils.PropertiesManager;
+import com.glass.brandwatch_shared.utils.StreamUtils;
 
 public class RequestBrandDataBluetoothTask extends AsyncTask<Void, Void, ArrayList<String>> {
 	private static final String TAG = RequestBrandDataBluetoothTask.class.getSimpleName();
