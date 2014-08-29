@@ -16,7 +16,7 @@ public class TopicsCard {
 	private final static int startTextSize = 24;
 	private final static int maxTopic = 7;
 
-	public static View build(Context context, String topicsData) {
+	public static View build(Context context, String topicsData, String queryName) {
 
 		Data data = new Gson().fromJson(topicsData, Data.class);
 		View view = View.inflate(context, R.layout.topics_card, null);
@@ -43,7 +43,7 @@ public class TopicsCard {
 		}
 
 		TextView footer = (TextView) view.findViewById(R.id.topics_footer);
-		footer.setText("Brandwatch");
+		footer.setText(queryName + " Topics");
 
 		return view;
 	}

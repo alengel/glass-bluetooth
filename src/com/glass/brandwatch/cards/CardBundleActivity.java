@@ -37,6 +37,7 @@ public class CardBundleActivity extends Activity {
 	private void createCards() {
 		Intent intent = getIntent();
 		List<String> data = intent.getStringArrayListExtra("data");
+		String queryName = intent.getStringExtra("queryName");
 
 		String featuresData = data.get(0);
 		String sentimentData = data.get(1);
@@ -45,9 +46,9 @@ public class CardBundleActivity extends Activity {
 		Log.i(TAG, "Measurement " + "Starting to build cards");
 
 		cardsBundle = new ArrayList<View>();
-		cardsBundle.add(SentimentCard.build(this, sentimentData));
-		cardsBundle.add(TopicsCard.build(this, topicsData));
-		cardsBundle.add(FeaturesCard.build(this, featuresData));
+		cardsBundle.add(SentimentCard.build(this, sentimentData, queryName));
+		cardsBundle.add(TopicsCard.build(this, topicsData, queryName));
+		cardsBundle.add(FeaturesCard.build(this, featuresData, queryName));
 	}
 
 	private class ScrollAdapter extends CardScrollAdapter {

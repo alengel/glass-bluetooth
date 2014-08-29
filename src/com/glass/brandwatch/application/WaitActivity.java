@@ -11,9 +11,8 @@ import android.util.Log;
 
 import com.glass.brandwatch.R;
 import com.glass.brandwatch.asynctask.RequestBrandDataBluetoothTask;
-import com.glass.brandwatch_shared.interfaces.WaitActivityInterface;
 
-public class WaitActivity extends Activity implements WaitActivityInterface {
+public class WaitActivity extends Activity {
 	static final private String TAG = WaitActivity.class.getSimpleName();
 	static final private int ENABLE_BLUETOOTH = 1;
 
@@ -70,5 +69,17 @@ public class WaitActivity extends Activity implements WaitActivityInterface {
 			new RequestBrandDataBluetoothTask(getApplicationContext(), device, query).execute();
 			break;
 		}
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		finish();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		finish();
 	}
 }

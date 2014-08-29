@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 public class SentimentCard {
 
-	public static View build(Context context, String sentimentData) {
+	public static View build(Context context, String sentimentData, String queryName) {
 		Data data = new Gson().fromJson(sentimentData, Data.class);
 
 		List<Value> results = data.results.get(0).values;
@@ -51,7 +51,7 @@ public class SentimentCard {
 		}
 
 		TextView footer = (TextView) view.findViewById(R.id.sentiment_footer);
-		footer.setText("Brandwatch");
+		footer.setText(queryName + " Sentiment");
 
 		return view;
 	}

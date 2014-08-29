@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.glass.brandwatch.cards.CardBundleActivity;
+import com.glass.brandwatch_shared.info.NotFoundActivity;
 import com.glass.brandwatch_shared.utils.PropertiesManager;
 import com.glass.brandwatch_shared.utils.StreamUtils;
 
@@ -90,7 +91,7 @@ public class RequestBrandDataBluetoothTask extends AsyncTask<Void, Void, ArrayLi
 			}
 		}
 
-		// Deserialise the data we got back from the server. For now an
+		// Deserialize the data we got back from the server. For now an
 		// assumption is made that it is an array list of strings
 		@SuppressWarnings("unchecked")
 		ArrayList<String> results = (ArrayList<String>) SerializationUtils.deserialize(value);
@@ -105,9 +106,10 @@ public class RequestBrandDataBluetoothTask extends AsyncTask<Void, Void, ArrayLi
 							device.getName()));
 			showCardsActivity(data);
 		} else {
-			Log.i(TAG,
-					String.format("Failed to query brand data for '%s' from device '%s'",
-							device.getName()));
+			Log.i(TAG, String.format("Failed to query brand data for '%s' from device '%s'", query,
+					device.getName()));
+
+			showQueryNotFoundActivity(query);
 		}
 	}
 
@@ -115,6 +117,15 @@ public class RequestBrandDataBluetoothTask extends AsyncTask<Void, Void, ArrayLi
 	private void showCardsActivity(ArrayList<String> data) {
 		Intent intent = new Intent(context, CardBundleActivity.class);
 		intent.putStringArrayListExtra("data", data);
+		intent.putExtra("queryName", query);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(intent);
+	}
+
+	// Show a screen when no matching Brandwatch query was found
+	private void showQueryNotFoundActivity(String queryName) {
+		Intent intent = new Intent(context, NotFoundActivity.class);
+		intent.putExtra("queryName", queryName);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 	}

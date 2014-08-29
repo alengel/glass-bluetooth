@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 
 public class FeaturesCard {
 
-	public static View build(Context context, String featuresData) {
+	public static View build(Context context, String featuresData, String queryName) {
 
 		Data data = new Gson().fromJson(featuresData, Data.class);
 		Product product = data.results.get(0);
@@ -35,7 +35,7 @@ public class FeaturesCard {
 		featuresList.setAdapter(modeAdapter);
 
 		TextView footer = (TextView) view.findViewById(R.id.features_footer);
-		footer.setText(product.name + " Features");
+		footer.setText(queryName + " Features");
 
 		return view;
 	}
@@ -47,7 +47,6 @@ public class FeaturesCard {
 
 	// Create a product class for each product
 	private class Product {
-		public String name;
 		public String color;
 		public Map<String, String> features;
 	}
